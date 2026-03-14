@@ -2,7 +2,7 @@ use std::{fmt, time::Instant};
 
 use notify_rust::{Notification, Timeout};
 
-use crate::audio::{play_notes, NOTES_PAUSE, NOTES_SKIP, NOTES_TRANSITION};
+use crate::audio::{play_notes, NOTES_PAUSE, NOTES_RESET, NOTES_SKIP, NOTES_TRANSITION};
 
 #[derive(Debug, PartialEq)]
 pub enum PomodoroMode {
@@ -94,6 +94,7 @@ impl PomodoroTimer {
     }
 
     pub fn reset(&mut self) {
+        std::thread::spawn(|| play_notes(NOTES_RESET));
         self.is_paused = true;
         self.cycles_completed = 0;
         self.current_mode = PomodoroMode::Work;

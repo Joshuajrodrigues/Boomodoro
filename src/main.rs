@@ -14,7 +14,11 @@ use crossterm::{
 };
 use ratatui::{prelude::CrosstermBackend, Terminal};
 
-use crate::{audio::play_notes, timer::PomodoroTimer, ui::draw_frame};
+use crate::{
+    audio::{play_notes, NOTES_QUIT},
+    timer::PomodoroTimer,
+    ui::draw_frame,
+};
 
 fn main() -> io::Result<()> {
     enable_raw_mode()?;
@@ -35,7 +39,7 @@ fn main() -> io::Result<()> {
         if poll(Duration::from_millis(16))? {
             if let Event::Key(key) = crossterm::event::read()? {
                 if key.code == KeyCode::Char('q') {
-                    play_notes(&[(440.0, 0.25)]);
+                    play_notes(NOTES_QUIT);
                     break;
                 } else if key.code == KeyCode::Char('p') {
                     pomo.toggle_paused();
