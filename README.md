@@ -47,7 +47,7 @@ cargo build --release
 
 ## Windows Support
 
-Currently Linux only. Windows support is a work in progress — contributions welcome. The main blocker is audio latency and terminal encoding. If you want to help, open an issue.
+Use exe from release.
 
 ## Built with
 
